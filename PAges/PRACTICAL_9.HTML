@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Practical 9</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      .nav {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        display: flex;
+        text-align: center;
+        padding: 0.5rem;
+        height: 3rem;
+        color: white;
+        background-color:gray;
+        z-index: 1;
+      }
+      .nav-horizontal-menu {
+        display: flex;
+        width: 100%;
+      }
+      .nav-horizontal-menu-a {
+        margin: auto;
+        text-decoration: none;
+        color: white;
+        border: 0;
+        border-radius: 0.8rem;
+        font-size: x-large;
+        padding: 0.5rem;
+      }
+      .nav-horizontal-menu-a:active 
+      {
+        transition: 0.1s;
+        transform: scale(0.8);
+      }
+      .side-menu-button 
+      {
+        display: none;
+        width: 3rem;
+        height: 3rem;
+        margin-top: auto;
+        margin-bottom: auto;
+        border-radius: 0.5rem;
+      }
+      .side-menu-button:active 
+      {
+        transition: 0.1s;
+        transform: scale(0.8);
+      }
+      .side-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 75%;
+        background-color: lightgrey;
+        z-index: 2;
+        transition: 0.7s;
+      }
+      .side-menu-a-collection {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 100%;
+        background-color: lightgrey;
+        z-index: 2;
+      }
+      .side-menu-a {
+        width: 100%;
+        margin: auto;
+        text-decoration: none;
+        color: white;
+        border: 0;
+        font-size: x-large;
+        padding: 1rem;
+      }
+      .side-menu-close-button {
+        display: block;
+        width: 2rem;
+        height: 2rem;
+        margin: 16px;
+        margin-bottom: 4rem;
+        border-radius: 0.8rem;
+      }
+      .side-menu-close-button:active {
+        transition: 0.1s;
+        transform: scale(0.8);
+      }
+      .banner {
+        position: relative;
+        color: white;
+        padding-left: 1rem;
+        background-image: url(../assets/bc.jpg);
+        background-size: cover;
+
+        height: 44rem;
+      }
+      .team {
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+        justify-content: center;
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+      .teamMember {
+        height: 21.5rem;
+        margin: 1rem;
+        background-color: rgb(233, 152, 2);
+        border-radius: 50%;
+        background-position: center;
+        background-size: cover;
+      }
+      .about {
+        display: flex;
+        margin-top: 1rem;
+        gap: 6px;
+      }
+      .about-us {
+        text-align: left;
+        background-color:lightgrey;
+        padding: 0.5rem;
+        width: 50%;
+      }
+      .articles {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        gap: 6px;
+        color: white;
+      }
+      .articleBox {
+        display: flex;
+        justify-content: center;
+        color: black;
+        position: relative;
+        height: 8rem;
+      }
+      .articleBox::before {
+        position: absolute;
+        content: "";
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url(../assets/project2.png);
+        background-size: cover;
+        background-position: center;
+        opacity: 40%;
+      }
+      .articleBox-content {
+        position: relative;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+      .technologies {
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+        margin-top: 1rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+      .technology {
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1rem;
+      }
+      .technology-img {
+        display: flex;
+        width: 100%;
+        height: 50%;
+        border-radius: 8px;
+      }
+      .technology-h4Type1 {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      .technology-h4Type2 {
+        font-weight: normal;
+        margin-bottom: 1rem;
+        text-align: justify;
+      }
+      .technology-a {
+        display: block;
+        background-color: red;
+        color: white;
+        width: 100%;
+        text-decoration: none;
+        border-radius: 8px;
+        text-align: center;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+      .technology-a:hover {
+        background-color: violet;
+      }
+      .contact {
+        display: flex;
+        left: 0;
+        top: 0;
+        right: 0;
+        justify-content: space-between;
+        padding: 0.5rem;
+        height: 70px;
+        color:black;
+        text-align: center;
+        align-items: center;
+        background-color: grey;
+      }
+      #side-menu-toggle:checked ~ .side-menu {
+        right: 0;
+      }
+      @media (min-width: 801px) and (max-width: 1199px) {
+        .side-menu-button {
+          display: none;
+        }
+        .side-menu {
+          display: none;
+        }
+        .team {
+          grid-template-columns: 50% 50%;
+        }
+        .teamMember {
+          height: 30rem;
+        }
+        .technologies {
+          grid-template-columns: 50% 50%;
+        }
+      }
+      @media (min-width: 626px) and (max-width: 800px) {
+        .nav {
+          justify-content: right;
+          padding-right: 1rem;
+        }
+        .nav-horizontal-menu {
+          display: none;
+        }
+        .side-menu-button {
+          display: block;
+        }
+        .banner {
+          height: 36rem;
+        }
+        .team {
+          grid-template-columns: 50% 50%;
+        }
+        .teamMember {
+          height: 20rem;
+        }
+        .about {
+          flex-direction: column;
+          gap: 6px;
+        }
+        .about-us {
+          width: fit-content;
+        }
+        .articles {
+          width: 100%;
+          gap: 6px;
+        }
+        .technologies {
+          grid-template-columns: 50% 50%;
+        }
+        .contact {
+          flex-direction: column;
+        }
+      }
+      @media (max-width: 625px) {
+        .nav {
+          justify-content: right;
+          padding-right: 1rem;
+        }
+        .nav-horizontal-menu {
+          display: none;
+        }
+        .side-menu-button {
+          display: block;
+        }
+        .banner {
+          height: 30rem;
+        }
+        .team {
+          grid-template-columns: 100%;
+        }
+        .teamMember {
+          height: 27rem;
+        }
+        .about {
+          flex-direction: column;
+        }
+        .about-us {
+          width: fit-content;
+        }
+        .articles {
+          width: 100%;
+        }
+        .technologies {
+          grid-template-columns: 100%;
+        }
+        .contact {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body
+    style="
+      position: relative;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+        'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    "
+  >
+    <nav class="nav">
+      <input style="display: none" type="checkbox" id="side-menu-toggle" />
+      <div class="nav-horizontal-menu">
+        <a href="#home" class="nav-horizontal-menu-a">Home</a>
+        <a href="#team" class="nav-horizontal-menu-a">Team</a>
+        <a href="#about" class="nav-horizontal-menu-a">About</a>
+        <a href="#technologies" class="nav-horizontal-menu-a">Technologies</a>
+        <a href="#contact" class="nav-horizontal-menu-a">Contact</a>
+      </div>
+      <div class="side-menu">
+        <label for="side-menu-toggle" class="side-menu-close-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            class="bi bi-x"
+            viewBox="0 0 16 16">
+            <path
+              d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+            />
+          </svg>
+        </label>
+        <div class="side-menu-a-collection">
+          <a href="#home" class="side-menu-a">Home</a>
+          <a href="#team" class="side-menu-a">Team</a>
+          <a href="#about" class="side-menu-a">About</a>
+          <a href="#technologies" class="side-menu-a">Technologies</a>
+          <a href="#contact" class="side-menu-a">Contact</a>
+        </div>
+      </div>
+
+      <label for="side-menu-toggle" class="side-menu-button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          class="bi bi-list"
+          viewBox="0 0 16 16">
+          <path
+            fill-rule="evenodd"
+            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+          />
+        </svg>
+      </label>
+    </nav>
+    <div style="position: absolute; top: 4rem; z-index: -1">
+      <label
+        id="home"
+        style="position: absolute; top: -4rem; visibility: hidden"
+      >
+        Home Scroll Management
+      </label>
+      <div class="banner">
+        <h1 style="position: absolute; margin-top: 4rem">Practical 9</h1>
+      </div>
+      <div style="position: relative; text-align: center; margin-top: 1rem">
+        <label
+          id="team"
+          style="position: absolute; top: -5rem; visibility: hidden"
+        >
+          Team Scroll Management
+        </label>
+        <h1>Team Members</h1>
+        <div class="team">
+          <div
+            class="teamMember"
+            style="
+              background-size: cover;
+              background-image: url(../assets/user1.png);
+            "
+          ></div>
+          <div
+            class="teamMember"
+            style="
+              background-size: cover;
+              background-image: url(../assets/user2.png);
+            "
+          ></div>
+          <div
+            class="teamMember"
+            style="
+              background-size: cover;
+              background-image: url(../assets/user3.png);
+            "
+          ></div>
+          <div
+            class="teamMember"
+            style="
+              background-size: cover;
+              background-image: url(../assets/user4.png);
+            "
+          ></div>
+        </div>
+      </div>
+      <div style="position: relative; text-align: center; margin-top: 1rem">
+        <label
+          id="about"
+          style="position: absolute; top: -5rem; visibility: hidden"
+        >
+          About Scroll Management
+        </label>
+        <h1>About Us</h1>
+        <div class="about">
+          <div class="about-us">
+            <h3 style="margin-bottom: 1rem">About Us</h3>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores
+              beatae facilis nulla cum adipisci minima sint rem nesciunt,
+              blanditiis eius, vitae laboriosam necessitatibus. Beatae, illo quo
+              fugit neque rem molestias?Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint fugiat aperiam non, porro ipsam accusamus 
+              sapiente optio ab laboriosam voluptate dicta, incidunt, quibusdam corrupti beatae numquam? Repudiandae provident quibusdam cum nisi 
+               aliquid repellendus laborum error molestias, ullam obcaecati doloribus nihil nulla quaerat, corporis aliquam perferendis corrupti 
+               aspernatur. Porro corporis magnam amet, ut consectetur dolorum temporibus obcaecati iste ipsam, repudiandae quae est error! 
+               Expedita eius molestias suscipit officia iure quaerat modi consequuntur accusamus, explicabo esse fuga? Alias blanditiis sequi 
+               optio non repellat enim excepturi eaque, 
+              sit nam id sed officia laborum molestiae eum! Eos, earum? Recusandae illo doloribus impedit?
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae exercitationem ducimus consequatur dolor, ipsa commodi 
+              distinctio pariatur, aliquam tempora, 
+              quaerat facilis et suscipit iure neque.
+            </p>
+          </div>
+          <div class="articles">
+            <div class="articleBox">
+              <h3 class="articleBox-content">Project-1</h3>
+            </div>
+            <div class="articleBox">
+              <h3 class="articleBox-content">Project-2</h3>
+            </div>
+            <div class="articleBox">
+              <h3 class="articleBox-content">Project-3</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="position: relative; text-align: center; margin-top: 1rem">
+        <label id="technologies" style="position: absolute; visibility: hidden">
+          Technologies Scroll Management
+        </label>
+        <h1>Technologies Used</h1>
+        <div class="technologies">
+          <div class="technology">
+            <img class="technology-img" src="../assets/html.jpeg" />
+            <h4 class="technology-h4Type1">Introduction to HTML</h4>
+            <h4 class="technology-h4Type2">
+              The HyperText Markup Language, or HTML is the standard markup
+              language for documents designed to be displayed in a web browser.
+              It can be assisted by technologies such as Cascading Style Sheets
+              (CSS) and scripting languages such as JavaScript.
+            </h4>
+            <a class="technology-a" href="./practical_5_html.html">Read more</a>
+          </div>
+          <div class="technology">
+            <img class="technology-img" src="../assets/css.jpeg" />
+            <h4 class="technology-h4Type1">Introduction to CSS</h4>
+            <h4 class="technology-h4Type2">
+              Cascading Style Sheets (CSS) is a style sheet language used for
+              describing the presentation of a document written in a markup
+              language such as HTML. It contains CSS design templates for
+              typography, forms, buttons, navigation. Cascading priority scheme
+              is predictable.
+            </h4>
+            <a class="technology-a" href="./practical_5_css.html">Read more</a>
+          </div>
+          <div class="technology">
+            <img class="technology-img" src="../assets/js.jpg" alt="" />
+            <h4 class="technology-h4Type1">Introduction to JavaScript</h4>
+            <h4 class="technology-h4Type2">
+              JavaScriptoften is a programming language that conforms to the
+              ECMAScript specification.[10] JavaScript is high-level, often
+              just-in-time compiled, and multi-paradigm. It has curly-bracket
+              syntax, dynamic typing, prototype-based object-orientation, and
+              first-class functions.
+            </h4>
+            <a class="technology-a" href="./practical_5_js.html">Read more</a>
+          </div>
+          <div class="technology">
+            <img class="technology-img" src="../assets/bootstrap.jpeg" />
+            <h4 class="technology-h4Type1">Introduction to Bootstrap</h4>
+            <h4 class="technology-h4Type2">
+              Bootstrap is a free and open-source CSS framework directed at
+              responsive, mobile-first front-end web development. It contains
+              CSS- and (optionally) JavaScript-based design templates for
+              typography, forms, buttons, navigation, and other interface
+              components.
+            </h4>
+            <a class="technology-a" href="./practical_5_bootstrap.html"
+              >Read more</a
+            >
+          </div>
+        </div>
+      </div>
+      <div style="position: relative; text-align: center; margin-top: 2rem">
+        <label id="contact" style="position: absolute; visibility: hidden">
+          Technologies Scroll Management
+        </label>
+
+        <div class="contact">
+          <h2 style="margin-top: auto; margin-bottom: auto">Contact Us</h2>
+          <h4 style="margin-top: auto; margin-bottom: auto;">
+            Email: <i>rohan.verma2711@gmail.com</i>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
