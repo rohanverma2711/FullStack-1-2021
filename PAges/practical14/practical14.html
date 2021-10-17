@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript - 1</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: rgb(128,129,129);
+            flex-direction: column;
+        }
+        h1{
+            text-transform: uppercase;
+            color: white;
+            font-family: sans-serif;
+        }
+        .cal{
+            display: flex;
+            width: 30vw;
+            justify-content: space-around;
+        }
+        .cal .sub{
+            height: 3.5rem;
+            width: 3.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;      
+            margin-top: 10px;
+            background-color: rgb(230,246,8);
+        }
+        .cal .add{
+            height: 3.5rem;
+            width: 3.5rem;
+            display: flex;
+            margin-top: 10px;
+            justify-content: center;
+            align-items: center;      
+            background-color: rgb(230,246,8);
+        }
+        .cal #count{
+            color: purple;
+        }
+    </style>
+</head>
+<body>
+    <h1>Counter</h1>
+    <div class="cal">
+        <button class="sub" onclick="dec()" disabled = true>
+            <p >-</p>
+        </button>
+        <h1 id = "count">0</h1>
+        <button class="add" onclick = "inc()">
+            <p>+</p>
+        </button>
+    </div>
+    <script src="./practical14.js"></script>
+</body>
+</html>
